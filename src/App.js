@@ -1,13 +1,19 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
+import MainPage from './components/MainPage'
+import MenuBar from './components/MenuBar'
+import Page from './components/Page'
 
 const App = () => {
 
   return (
-    <Routes>
-      <Route path="/gh-pages/test" element={<div>this is test page</div>} />
-      <Route path="/gh-pages/" element={<div>this is main page</div>} />
-    </Routes>
+    <>
+      <MenuBar />
+      <Routes>
+        <Route path="/gh-pages/" element={<MainPage />} />
+        <Route path="/gh-pages/blogs/:blog" element={<Page />} />
+      </Routes>
+    </>
   )
 }
 
