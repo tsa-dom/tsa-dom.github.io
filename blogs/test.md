@@ -8,20 +8,8 @@
 
 * This is awesome
 
-```jsx
-import React from 'react'
-
-const App = () => {
-  
-  return (
-    <div>
-      Hello world
-    </div>
-  )
-}
-fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-
-export default App
+```
+This is something new
 ```
 
 `This is interesting also`
