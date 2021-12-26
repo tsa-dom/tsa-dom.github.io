@@ -6,7 +6,7 @@ const About = () => {
   const [markdown, setMarkdown] = useState(undefined)
 
   useEffect(async () => {
-    const res = await fetch('/gh-pages/about.md')
+    const res = await fetch('/gh-pages/md/about.md')
     const text = await res.text()
     setMarkdown(text)
   }, [setMarkdown])
