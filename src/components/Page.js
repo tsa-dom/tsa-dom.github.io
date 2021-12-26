@@ -12,7 +12,7 @@ const Page = () => {
   const params = useParams()
 
   useEffect(async () => {
-    const res = await fetch(`/gh-pages/blogs/${params['blog']}.md`)
+    const res = await fetch(`/gh-pages/assets/${params['blog']}.md`)
     const text = await res.text()
     if (text.includes('DOCTYPE')) {
       navigate('/gh-pages/not-found')
