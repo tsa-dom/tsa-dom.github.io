@@ -42,7 +42,7 @@ jobs:
           add: 'blogs'
           author_name: Tapio Salonen
           author_email: tsa.dom@pm.me
-          branch: main
+          branch: gh-pages
           branch_mode: create
           message: 'Create blogs'
         
