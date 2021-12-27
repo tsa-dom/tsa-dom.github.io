@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 const MainPage = () => {
 

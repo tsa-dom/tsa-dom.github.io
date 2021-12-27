@@ -4,7 +4,8 @@ import { BLOGS_URL } from '../config'
 export const getBlog = async (blogName) => {
   try {
     const res = await axios.get(`${BLOGS_URL}/articles/${blogName}.md`)
-    return res.data
+    const parsedData = res.data.split('--->')[1]
+    return parsedData
   } catch (err) {
     return null
   }
@@ -13,7 +14,8 @@ export const getBlog = async (blogName) => {
 export const getPage = async (pageName) => {
   try {
     const res = await axios.get(`${BLOGS_URL}/pages/${pageName}.md`)
-    return res.data
+    const parsedData = res.data.split('--->')[1]
+    return parsedData
   } catch (err) {
     return null
   }
