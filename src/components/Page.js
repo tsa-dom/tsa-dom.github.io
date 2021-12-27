@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useNavigate, useParams } from 'react-router-dom'
+import { getBlog } from '../services/blogs'
 
 const Page = () => {
   const [markdown, setMarkdown] = useState(undefined)
@@ -12,11 +13,9 @@ const Page = () => {
   const params = useParams()
 
   useEffect(async () => {
-    const res = await fetch(`/gh-pages/assets/${params['blog']}.md`)
-    const text = await res.text()
-    if (text.includes('DOCTYPE')) {
-      navigate('/gh-pages/not-found')
-    } else setMarkdown(text)
+    const blog = await getBlog(params['blog'])
+    if (blog) setMarkdown(blog)
+    else navigate('/gh-pages/not-found')
   }, [setMarkdown])
 
   if (!markdown) return <></>
@@ -24,7 +23,7 @@ const Page = () => {
   return (
     <Container className='page'>
       {markdown.split('```').map((r, i) => {
-        const lang = r.split('\r')[0]
+        const lang = r.split('\n')[0]
         const code = r.substr(lang.length + 2, r.length - 6)
         if (lang === 'jsx') {
           return (

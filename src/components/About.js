@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
+import { getPage } from '../services/blogs'
 
 const About = () => {
   const [markdown, setMarkdown] = useState(undefined)
 
   useEffect(async () => {
-    const res = await fetch('/gh-pages/assets/about.md')
-    const text = await res.text()
-    setMarkdown(text)
+    const contents = await getPage('about')
+    setMarkdown(contents)
   }, [setMarkdown])
 
   return (
