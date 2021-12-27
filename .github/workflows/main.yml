@@ -30,12 +30,12 @@ jobs:
   fetch-html-files:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        run: apt-get install -y git
-        run: git clone https://github.com/tsa-dom/contents.git
-        run: cp -r ./contents/blogs .
-        run: rm -rf contents
-        uses: EndBug/add-and-commit@v7
+      - run: |
+          apt-get install -y git
+          git clone https://github.com/tsa-dom/contents.git
+          cp -r ./contents/blogs .
+          rm -rf contents
+      - uses: EndBug/add-and-commit@v7
         with:
           add: 'blogs'
           author_name: Tapio Salonen
