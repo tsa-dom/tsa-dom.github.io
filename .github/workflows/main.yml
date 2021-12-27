@@ -26,7 +26,6 @@ jobs:
           npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-<<<<<<< HEAD
 
   fetch-html-files:
     runs-on: ubuntu-latest
@@ -44,6 +43,3 @@ jobs:
           branch: gh-pages
           branch_mode: create
           message: 'Create blogs'
-        
-=======
->>>>>>> 06f95d025f62a1be2ee58c9d78683792365268b3
