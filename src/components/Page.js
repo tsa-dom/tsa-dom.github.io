@@ -24,7 +24,7 @@ const Page = () => {
     <Container className='page'>
       {markdown.split('```').map((r, i) => {
         const lang = r.split('\n')[0]
-        const code = r.substr(lang.length + 2, r.length - 6)
+        const code = r.substr(lang.length + 1, r.length - 6)
         if (lang === 'jsx') {
           return (
             <SyntaxHighlighter
