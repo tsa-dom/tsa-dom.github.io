@@ -44,6 +44,7 @@
           var decoded = l.search.slice(1).replaceAll('?/', '').split('&').map(function(s) { 
             return s.replace(/~and~/g, '&')
           }).join('?');
+          console.log(decoded)
           window.history.replaceState(null, null,
               l.pathname.slice(0, -1) + decoded + l.hash
           );
