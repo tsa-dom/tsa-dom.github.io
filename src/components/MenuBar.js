@@ -6,15 +6,15 @@ const MenuBar = () => {
   const navigate = useNavigate()
 
   const toAbout = () => {
-    navigate('/platform/pages/about')
+    navigate('/pages/about')
   }
 
   const toBlogs = () => {
-    navigate('/platform/blogs')
+    navigate('/blogs')
   }
 
   const toMain = () => {
-    navigate('/platform')
+    navigate('/')
   }
 
   return (

@@ -6,7 +6,7 @@ const PageNotFound = () => {
   const navigate = useNavigate()
 
   const handleToMainPage = () => {
-    navigate('/platform')
+    navigate('/')
   }
 
   return (

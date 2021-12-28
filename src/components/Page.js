@@ -15,7 +15,7 @@ const Page = () => {
   useEffect(async () => {
     const blog = await getBlog(params['blog'])
     if (blog) setMarkdown(blog)
-    else navigate('/platform/not-found')
+    else navigate('/not-found')
   }, [setMarkdown])
 
   if (!markdown) return <></>
