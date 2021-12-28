@@ -6,7 +6,7 @@ const PageNotFound = () => {
   const navigate = useNavigate()
 
   const handleToMainPage = () => {
-    navigate('/gh-pages')
+    navigate('/platform')
   }
 
   return (

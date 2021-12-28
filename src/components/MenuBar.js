@@ -6,19 +6,19 @@ const MenuBar = () => {
   const navigate = useNavigate()
 
   const toAbout = () => {
-    navigate('/gh-pages/about')
+    navigate('/platform/pages/about')
   }
 
   const toBlogs = () => {
-    navigate('/gh-pages/blogs')
+    navigate('/platform/blogs')
   }
 
   const toMain = () => {
-    navigate('/gh-pages')
+    navigate('/platform')
   }
 
   return (
-    <div style={{ width: '100%', backgroundColor: 'lightblue', height: 50 }}>
+    <div className='menu'>
       <Container style={{ maxWidth: 1080, fontSize: 23 }}>
         <Nav style={{ marginLeft: -15, marginRight: -15 }}>
           <Nav.Link className='nav-button' onClick={toMain}>Main</Nav.Link>

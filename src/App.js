@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import MainPage from './components/MainPage'
 import MenuBar from './components/MenuBar'
 import Page from './components/Page'
@@ -14,11 +14,12 @@ const App = () => {
     <>
       <MenuBar />
       <Routes>
-        <Route path="/gh-pages/about" element={<About />} />
-        <Route path="/gh-pages/blogs" element={<Blogs />} />
-        <Route path="/gh-pages/blogs/:blog" element={<Page />} />
-        <Route path="/gh-pages/not-found" element={<PageNotFound />}/>
-        <Route path="/gh-pages/" element={<MainPage />} />
+        <Route path="/platform/pages/about" element={<About />} />
+        <Route path="/platform/blogs" element={<Blogs />} />
+        <Route path="/platform/blogs/:blog" element={<Page />} />
+        <Route path="/platform/not-found" element={<PageNotFound />}/>
+        <Route path="/platform/pages/main" element={<Navigate to="/platform" />} />
+        <Route path="/platform/" element={<MainPage />} />
       </Routes>
     </>
   )

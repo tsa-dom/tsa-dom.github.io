@@ -14,6 +14,7 @@ export const getBlog = async (blogName) => {
 export const getPage = async (pageName) => {
   try {
     const res = await axios.get(`${BLOGS_URL}/pages/${pageName}.md`)
+    console.log(res)
     const parsedData = res.data.split('--->')[1]
     return parsedData
   } catch (err) {

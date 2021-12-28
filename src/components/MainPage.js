@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
-import { Helmet } from 'react-helmet-async'
+import { getPage } from '../services/blogs'
+import ReactMarkdown from 'react-markdown'
 
 const MainPage = () => {
+  // This component is almost same as About.js, fix later
+  const [markdown, setMarkdown] = useState(undefined)
+
+  useEffect(async () => {
+    const contents = await getPage('main')
+    setMarkdown(contents)
+  }, [setMarkdown])
 
   return (
     <Container className='page'>
-      <Helmet>
-        <title>Main</title>
-        <meta name="description" content="Main page for tsadom's blog platform" />
-      </Helmet>
-      <h1>This is an awesome mainpage</h1>
+      <ReactMarkdown>
+        {markdown}
+      </ReactMarkdown>
     </Container>
   )
 }
