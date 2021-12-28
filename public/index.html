@@ -40,13 +40,13 @@
       // the correct url will be waiting in the browser's history for
       // the single page app to route accordingly.
       (function(l) {
-        console.log(l.search)
+        //console.log(l.search)
         if (l.search[1] === '/' ) {
-          console.log(l.search)
-          var decoded = l.search.slice(1).replaceAll('?/', '').split('&').map(function(s) { 
+          //console.log(l.search)
+          var decoded = l.search.slice(1).replaceAll('&/', '').split('&').map(function(s) { 
             return s.replace(/~and~/g, '&')
           }).join('?');
-          console.log(decoded)
+          //console.log(decoded)
           window.history.replaceState(null, null,
               l.pathname.slice(0, -1) + decoded + l.hash
           );
