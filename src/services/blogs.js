@@ -20,3 +20,12 @@ export const getPage = async (pageName) => {
     return null
   }
 }
+
+export const getConfig = async (configName) => {
+  try {
+    const res = await axios.get(`${BLOGS_URL}/config/${configName}.json`)
+    return Object(res.data)
+  } catch (err) {
+    return null
+  }
+}

@@ -20,6 +20,7 @@ const App = () => {
         <Route path="/not-found" element={<PageNotFound />}/>
         <Route path="/pages/main" element={<Navigate to="/" />} />
         <Route path="/" element={<MainPage />} />
+        <Route path="*" element={<Navigate to="/not-found" />} />
       </Routes>
     </>
   )

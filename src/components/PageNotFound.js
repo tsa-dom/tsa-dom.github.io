@@ -11,10 +11,10 @@ const PageNotFound = () => {
 
   return (
     <div style={{ textAlign: 'center', marginTop: window.innerHeight / 4 }}>
-      <h1>... Ooops ...</h1>
-      <h2>404 - Page Not Found</h2>
+      <h3>... Ooops ...</h3>
+      <h4>404 - Page Not Found</h4>
       <Button
-        style={{ marginTop: 20, backgroundColor: 'lightblue', color: 'black', fontSize: 20 }}
+        style={{ marginTop: 20, backgroundColor: 'rgb(45, 185, 143)', color: 'black', fontSize: 16 }}
         onClick={handleToMainPage}
       >
         Back to main page
