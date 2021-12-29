@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { BLOGS_URL } from '../config'
 
-export const getBlog = async (blogName) => {
+export const getPost = async (postName) => {
   try {
-    const res = await axios.get(`${BLOGS_URL}/articles/${blogName}.md`)
+    const res = await axios.get(`${BLOGS_URL}/articles/${postName}.md`)
     const parsedData = res.data.split('--->')[1]
     return parsedData
   } catch (err) {

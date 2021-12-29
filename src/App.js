@@ -1,12 +1,11 @@
 import React from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import MainPage from './components/MainPage'
 import MenuBar from './components/MenuBar'
-import Page from './components/Page'
+import Post from './components/Post'
 import PageNotFound from './components/PageNotFound'
-import About from './components/About'
 import './App.css'
-import Blogs from './components/Blogs'
+import Blog from './components/Blog'
+import Page from './components/Page'
 
 const App = () => {
 
@@ -14,12 +13,11 @@ const App = () => {
     <>
       <MenuBar />
       <Routes>
-        <Route path="/pages/about" element={<About />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/blogs/:blog" element={<Page />} />
+        <Route path="/pages/:page" element={<Page />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:post" element={<Post />} />
         <Route path="/not-found" element={<PageNotFound />}/>
-        <Route path="/pages/main" element={<Navigate to="/" />} />
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<Page main />} />
         <Route path="*" element={<Navigate to="/not-found" />} />
       </Routes>
     </>

@@ -1,44 +1,40 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getBlog } from '../services/blogs'
+import { getPage } from '../services/blog'
+import { useSelector, useDispatch } from 'react-redux'
+import { addPage } from '../features/pageSlice'
 
-const Page = () => {
+const Page = ({ main }) => {
   const [markdown, setMarkdown] = useState(undefined)
-  const navigate = useNavigate()
+  const pages = useSelector(state => state.pages.entries)
   const params = useParams()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(async () => {
-    const blog = await getBlog(params['blog'])
-    if (blog) setMarkdown(blog)
-    else navigate('/not-found')
-  }, [setMarkdown])
-
-  if (!markdown) return <></>
+    const fileName = main ? 'main' : params['page']
+    if (params['page'] === 'main') navigate('/')
+    const page = pages.find(p => p.file === fileName)
+    if (page) setMarkdown(page.markdown)
+    else {
+      const source = await getPage(fileName)
+      if (source) {
+        dispatch(addPage({
+          markdown: source,
+          file: fileName
+        }))
+        setMarkdown(source)
+      } else navigate('/not-found')
+    }
+  })
 
   return (
     <Container className='page'>
-      {markdown.split('```').map((r, i) => {
-        const lang = r.split('\n')[0]
-        const code = r.substr(lang.length + 1, r.length - 6)
-        if (lang === 'jsx') {
-          return (
-            <SyntaxHighlighter
-              key={i}
-              language={lang}
-              style={vscDarkPlus}
-              wrapLines={true}
-              lineProps={{ style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' } }}
-            >{code}</SyntaxHighlighter>
-          )
-        } else return (
-          <ReactMarkdown key={i}>{r}</ReactMarkdown>
-        )
-      })}
+      <ReactMarkdown>
+        {markdown}
+      </ReactMarkdown>
     </Container>
   )
 }
