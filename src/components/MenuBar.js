@@ -19,7 +19,7 @@ const MenuBar = () => {
 
   return (
     <div className='menu'>
-      <Container style={{ maxWidth: 1080, fontSize: 23 }}>
+      <Container style={{ maxWidth: 1024, fontSize: 23 }}>
         <Nav style={{ marginLeft: -15, marginRight: -15 }}>
           <Nav.Link className='nav-button' onClick={toMain}>Main</Nav.Link>
           <Nav.Link className='nav-button' onClick={toAbout}>About me</Nav.Link>
