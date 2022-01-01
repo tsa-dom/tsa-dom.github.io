@@ -3,16 +3,12 @@ import { createSlice } from '@reduxjs/toolkit'
 export const blogSlice = createSlice({
   name: 'blog',
   initialState: {
-    posts: [],
-    config: null
+    posts: []
   },
   reducers: {
     addPost: (state, post) => {
       state.posts = state.posts.concat(post.payload)
-    },
-    setConfig: (state, config) => {
-      state.config = config.payload
-    },
+    }
   }
 })
 

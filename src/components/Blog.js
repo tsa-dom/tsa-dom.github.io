@@ -3,17 +3,17 @@ import { Button, Card, Col, Container, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { getConfig } from '../services/blog'
 import { useSelector, useDispatch } from 'react-redux'
-import { setConfig } from '../features/blogSlice'
+import { setBlog } from '../features/configSlice'
 
 const Blog = () => {
-  const config = useSelector(state => state.blog.config)
+  const config = useSelector(state => state.config.blog)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   useEffect(async () => {
     if (!config) {
       const conf = await getConfig('blog')
-      dispatch(setConfig(conf))
+      dispatch(setBlog(conf))
     }
   }, [])
 

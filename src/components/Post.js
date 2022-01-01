@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
