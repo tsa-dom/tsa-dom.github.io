@@ -20,7 +20,7 @@ const Blog = () => {
   if (!config) return <></>
 
   return (
-    <Container className='page'>
+    <Container className='page-card'>
       <h4 style={{ marginBottom: 20 }}>All blog posts</h4>
       <Row xs={1} md={3} className="g-4">
         {[...config]

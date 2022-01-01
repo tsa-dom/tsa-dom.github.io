@@ -56,7 +56,6 @@ export const getConfig = async (configName) => {
     const posts = process.env.NODE_ENV === 'development'
       ? Object(res.data)
       : Object(res.data).filter(post => !post.file.includes('test'))
-    console.log(posts)
     return posts
   } catch (err) {
     return null

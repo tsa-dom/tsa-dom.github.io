@@ -6,6 +6,7 @@ import { getPage } from '../services/blog'
 import { useSelector, useDispatch } from 'react-redux'
 import { addPage } from '../features/pageSlice'
 import Helmet from './Helmet'
+import remarkGfm from 'remark-gfm'
 
 const Page = ({ main }) => {
   const [data, setData] = useState(undefined)
@@ -31,11 +32,18 @@ const Page = ({ main }) => {
   if (!data) return <></>
 
   return (
-    <Container className='page'>
+    <Container className='separator'>
       <Helmet meta={data.meta} />
-      <ReactMarkdown>
-        {data.markdown}
-      </ReactMarkdown>
+      <Container className='page'>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {data.markdown}
+        </ReactMarkdown>
+      </Container>
+      <Container className='tab'>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {data.markdown}
+        </ReactMarkdown>
+      </Container>
     </Container>
   )
 }

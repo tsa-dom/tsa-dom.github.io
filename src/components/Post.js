@@ -34,36 +34,38 @@ const Post = () => {
   const acceptedLangs = ['jsx']
 
   return (
-    <Container className='page'>
+    <Container className='separator'>
       <Helmet meta={data.meta} />
-      {data.markdown.split('```').map((r, i) => {
-        const lang = r.split('\n')[0]
-        if (acceptedLangs.includes(lang)) {
-          const code = r.substr(lang.length + 1, r.length - 5)
-          return (
-            <SyntaxHighlighter
-              key={i}
-              language={lang}
-              style={vscDarkPlus}
-              wrapLines={true}
+      <Container className='page'>
+        {data.markdown.split('```').map((r, i) => {
+          const lang = r.split('\n')[0]
+          if (acceptedLangs.includes(lang)) {
+            const code = r.substr(lang.length + 1, r.length - 5)
+            return (
+              <SyntaxHighlighter
+                key={i}
+                language={lang}
+                style={vscDarkPlus}
+                wrapLines={true}
               //lineProps={{ style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' } }}
-            >{code}</SyntaxHighlighter>
-          )
-        } else {
-          const pieces = r.split('<img src="').map(p => p.split('">')).flat(1)
-          return pieces.map((p, j) => {
-            if (isUrlValid(p)) {
-              return (
-                <div key={j} style={{ textAlign: 'center', marginBottom: 20 }}>
-                  <img src={p} style={{ maxWidth: '100%' }} />
-                </div>
-              )
-            } else {
-              return <ReactMarkdown key={j}>{p}</ReactMarkdown>
-            }
-          })
-        }
-      })}
+              >{code}</SyntaxHighlighter>
+            )
+          } else {
+            const pieces = r.split('<img src="').map(p => p.split('">')).flat(1)
+            return pieces.map((p, j) => {
+              if (isUrlValid(p)) {
+                return (
+                  <div key={j} style={{ textAlign: 'center', marginBottom: 20 }}>
+                    <img src={p} style={{ maxWidth: '100%' }} />
+                  </div>
+                )
+              } else {
+                return <ReactMarkdown key={j}>{p}</ReactMarkdown>
+              }
+            })
+          }
+        })}
+      </Container>
     </Container>
   )
 }
