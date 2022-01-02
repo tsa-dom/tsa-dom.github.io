@@ -30,6 +30,7 @@ export const getPost = async (postName) => {
       meta
     }
   } catch (err) {
+    console.log(err)
     return null
   }
 }
@@ -46,6 +47,7 @@ export const getPage = async (pageName) => {
       meta
     }
   } catch (err) {
+    console.log(err)
     return null
   }
 }
@@ -53,11 +55,15 @@ export const getPage = async (pageName) => {
 export const getConfig = async (configName) => {
   try {
     const res = await axios.get(`${BLOGS_URL}/config/${configName}.json`)
-    const posts = process.env.NODE_ENV === 'development'
-      ? Object(res.data)
-      : Object(res.data).filter(post => !post.file.includes('test'))
-    return posts
+    console.log(res)
+    if (configName === 'blog') {
+      return process.env.NODE_ENV === 'development'
+        ? Object(res.data)
+        : Object(res.data).filter(post => !post.file.includes('test'))
+    }
+    return Object(res.data)
   } catch (err) {
+    console.log(err)
     return null
   }
 }
