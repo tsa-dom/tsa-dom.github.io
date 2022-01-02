@@ -23,10 +23,10 @@ const Page = ({ main }) => {
   useEffect(() => {
     window.onscroll = () => {
       const element = document.getElementById('sticky-col')
-      if (element && window.pageYOffset > 40) {
+      if (element && window.pageYOffset > 50) {
         element.style.position = 'fixed'
         element.style.top = 0
-        element.style.marginTop = '40px'
+        element.style.marginTop = '30px'
       } else {
         element.style.position = 'static'
         element.style.top = 'initial'
