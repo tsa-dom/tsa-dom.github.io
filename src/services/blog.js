@@ -55,7 +55,6 @@ export const getPage = async (pageName) => {
 export const getConfig = async (configName) => {
   try {
     const res = await axios.get(`${BLOGS_URL}/config/${configName}.json`)
-    console.log(res)
     if (configName === 'blog') {
       return process.env.NODE_ENV === 'development'
         ? Object(res.data)

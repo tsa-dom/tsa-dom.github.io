@@ -64,7 +64,7 @@ const Page = ({ main }) => {
       <Container className='tab'>
         <Tab.Container activeKey={main ? 'main' : params['page']} >
           {config &&
-            <Col>
+            <Col style={{ position: 'fixed', width: 276 }}>
               <h4>Navigation</h4>
               <Nav variant="pills" className="flex-column">
                 {config.map((c, i) => {

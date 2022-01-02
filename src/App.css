@@ -110,3 +110,7 @@
 .nav-link:hover {
   cursor: pointer;
 }
+
+body {
+  overflow-y: scroll;
+}
