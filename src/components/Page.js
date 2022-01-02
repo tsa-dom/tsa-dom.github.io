@@ -20,6 +20,21 @@ const Page = ({ main }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    window.onscroll = () => {
+      const element = document.getElementById('sticky-col')
+      if (element && window.pageYOffset > 40) {
+        element.style.position = 'fixed'
+        element.style.top = 0
+        element.style.marginTop = '40px'
+      } else {
+        element.style.position = 'static'
+        element.style.top = 'initial'
+        element.style.marginTop = 0
+      }
+    }
+  }, [])
+
   useEffect(async () => {
     if (!pageConfig) {
       const conf = await getConfig('pages')
@@ -64,11 +79,11 @@ const Page = ({ main }) => {
       <Container className='tab'>
         <Tab.Container activeKey={main ? 'main' : params['page']} >
           {config &&
-            <Col style={{ position: 'fixed', width: 276 }}>
-              <h4>Navigation</h4>
-              <Nav variant="pills" className="flex-column">
+            <Col id="sticky-col">
+              <h4 id="sticky-col-head">Navigation</h4>
+              <Nav variant="pills" className="flex-row" style={{ width: 276, maxHeight: '50vw', overflowY: 'auto', overflowX: 'hidden' }}>
                 {config.map((c, i) => {
-                  return <Nav.Item key={i}>
+                  return <Nav.Item key={i} style={{ width: 256 }}>
                     <Nav.Link className="tab-link" eventKey={c.file} onClick={() => navigate(`/pages/${c.file}`)}>{c.title}</Nav.Link>
                   </Nav.Item>
                 })}
