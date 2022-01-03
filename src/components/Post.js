@@ -3,19 +3,20 @@ import { Container } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { getPost } from '../services/blog'
 import { useSelector, useDispatch } from 'react-redux'
 import { addPost } from '../features/blogSlice'
 import Helmet from './Helmet'
 import { isUrlValid } from '../utils/helpers'
+import PageNotFound from './PageNotFound'
 
 const Post = () => {
   const posts = useSelector(state => state.blog.posts)
   const [data, setData] = useState(undefined)
-  const navigate = useNavigate()
   const params = useParams()
   const dispatch = useDispatch()
+  const [notFound, setNotFound] = useState(false)
 
   useEffect(async () => {
     const post = posts.find(p => p.file === params['post'])
@@ -25,9 +26,11 @@ const Post = () => {
       if (source) {
         dispatch(addPost(source))
         setData(source)
-      } else navigate('/not-found')
+      } else setNotFound(true)
     }
-  }, [])
+  }, [notFound])
+
+  if (notFound) return <PageNotFound />
 
   if (!data) return <></>
   const acceptedLangs = ['jsx']

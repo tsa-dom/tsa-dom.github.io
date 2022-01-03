@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import MenuBar from './components/MenuBar'
 import Post from './components/Post'
 import PageNotFound from './components/PageNotFound'
@@ -18,7 +18,7 @@ const App = () => {
         <Route path="/blog/:post" element={<Post />} />
         <Route path="/not-found" element={<PageNotFound />}/>
         <Route path="/" element={<Page main />} />
-        <Route path="*" element={<Navigate to="/not-found" />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   )
