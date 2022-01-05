@@ -79,7 +79,7 @@ const Page = ({ main }) => {
   return (
     <Container className='separator'>
       <Helmet meta={data.meta} />
-      <Container className='page' style={{ color: styles.white }}>
+      <Container className='page' style={{ color: dark ? styles.white : styles.dark }}>
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
         >

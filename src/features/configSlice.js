@@ -6,7 +6,7 @@ export const configSlice = createSlice({
     groups: null,
     pages: null,
     blog: null,
-    dark: localStorage.getItem('darkmode') ? true : false
+    dark: true//localStorage.getItem('darkmode') ? true : false
   },
   reducers: {
     setGroups: (state, groups) => {

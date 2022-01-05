@@ -41,7 +41,7 @@ const Post = () => {
   return (
     <Container className='separator'>
       <Helmet meta={data.meta} />
-      <Container className='page' style={{ color: dark ? styles.white : 'black' }}>
+      <Container className='page' style={{ color: dark ? styles.white : styles.dark }}>
         {data.markdown.split('```').map((r, i) => {
           const lang = r.split('\n')[0]
           if (acceptedLangs.includes(lang)) {
