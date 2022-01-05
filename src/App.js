@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import MenuBar from './components/MenuBar'
 import Post from './components/Post'
 import PageNotFound from './components/PageNotFound'
 import './App.css'
+import './Dark.css'
 import Blog from './components/Blog'
 import Page from './components/Page'
+import clsx from 'clsx'
+import { useSelector } from 'react-redux'
 
 const App = () => {
+  const dark = useSelector(state => state.config.dark)
+  useEffect(() => {
+    document.body.style.backgroundColor = dark ? 'rgb(18, 18, 18)' : 'white'
+  }, [dark])
 
   return (
-    <>
+    <div className={clsx({ 'body-dark': dark })}>
       <MenuBar />
       <Routes>
         <Route path="/pages/:page" element={<Page />} />
@@ -20,7 +27,7 @@ const App = () => {
         <Route path="/" element={<Page main />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-    </>
+    </div>
   )
 }
 

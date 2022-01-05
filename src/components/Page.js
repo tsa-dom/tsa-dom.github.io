@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Nav, Tab } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
@@ -9,6 +10,8 @@ import Helmet from './Helmet'
 import remarkGfm from 'remark-gfm'
 import { getConfig } from '../services/blog'
 import { setPages, setGroups } from '../features/configSlice'
+import PageNotFound from './PageNotFound'
+import { styles } from '../utils/styles'
 
 const Page = ({ main }) => {
   const [data, setData] = useState(undefined)
@@ -19,6 +22,8 @@ const Page = ({ main }) => {
   const params = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [notFound, setNotFound] = useState(false)
+  const dark = useSelector(state => state.config.dark)
 
   useEffect(() => {
     window.onscroll = () => {
@@ -36,6 +41,7 @@ const Page = ({ main }) => {
   }, [])
 
   useEffect(async () => {
+    setNotFound(false)
     if (!pageConfig) {
       const conf = await getConfig('pages')
       dispatch(setPages(conf))
@@ -53,7 +59,7 @@ const Page = ({ main }) => {
       if (source) {
         dispatch(addPage(source))
         setData(source)
-      } else navigate('/not-found')
+      } else setNotFound(true)
     }
   }, [params])
 
@@ -66,13 +72,17 @@ const Page = ({ main }) => {
     }
   }, [setConfig, data])
 
+  if(notFound) return <PageNotFound />
+
   if (!data) return <></>
 
   return (
     <Container className='separator'>
       <Helmet meta={data.meta} />
-      <Container className='page'>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+      <Container className='page' style={{ color: styles.white }}>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+        >
           {data.markdown}
         </ReactMarkdown>
       </Container>

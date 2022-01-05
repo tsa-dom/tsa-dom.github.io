@@ -10,6 +10,8 @@ import { addPost } from '../features/blogSlice'
 import Helmet from './Helmet'
 import { isUrlValid } from '../utils/helpers'
 import PageNotFound from './PageNotFound'
+import remarkGfm from 'remark-gfm'
+import { styles } from '../utils/styles'
 
 const Post = () => {
   const posts = useSelector(state => state.blog.posts)
@@ -17,6 +19,7 @@ const Post = () => {
   const params = useParams()
   const dispatch = useDispatch()
   const [notFound, setNotFound] = useState(false)
+  const dark = useSelector(state => state.config.dark)
 
   useEffect(async () => {
     const post = posts.find(p => p.file === params['post'])
@@ -38,7 +41,7 @@ const Post = () => {
   return (
     <Container className='separator'>
       <Helmet meta={data.meta} />
-      <Container className='page'>
+      <Container className='page' style={{ color: dark ? styles.white : 'black' }}>
         {data.markdown.split('```').map((r, i) => {
           const lang = r.split('\n')[0]
           if (acceptedLangs.includes(lang)) {
@@ -62,7 +65,12 @@ const Post = () => {
                   </div>
                 )
               } else {
-                return <ReactMarkdown key={j}>{p}</ReactMarkdown>
+                return <ReactMarkdown
+                  key={j}
+                  remarkPlugins={[remarkGfm]}
+                >
+                  {p}
+                </ReactMarkdown>
               }
             })
           }

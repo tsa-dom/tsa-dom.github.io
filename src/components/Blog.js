@@ -9,6 +9,7 @@ const Blog = () => {
   const config = useSelector(state => state.config.blog)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const dark = useSelector(state => state.config.dark)
 
   useEffect(async () => {
     if (!config) {
@@ -20,7 +21,7 @@ const Blog = () => {
   if (!config) return <></>
 
   return (
-    <Container className='page-card'>
+    <Container className='page-card' style={{ color: dark ? 'rgb(230, 230, 230)' : 'black' }}>
       <h4 style={{ marginBottom: 20 }}>All blog posts</h4>
       <Row xs={1} sm={2} md={3} className="g-4">
         {[...config]
@@ -39,7 +40,7 @@ const Blog = () => {
                   : `Published ${diffYears} years ago`
             return (
               <Col key={i}>
-                <Card border="dark">
+                <Card border="dark" text={dark ? 'light' : 'dark' } bg={dark ? 'dark' : 'light'}>
                   <Card.Header as="h5">{blog.keywords}</Card.Header>
                   <Card.Body>
                     <Card.Title>{blog.title}</Card.Title>
