@@ -2,7 +2,7 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { styles } from '../utils/styles'
+import { styles } from '../styles/styles'
 
 const PageNotFound = () => {
   const navigate = useNavigate()
@@ -16,7 +16,7 @@ const PageNotFound = () => {
     <div style={{
       textAlign: 'center',
       marginTop: window.innerHeight / 6,
-      color: dark ? styles.white : 'black'
+      color: dark ? styles.white : styles.black
     }}>
       <h3>... Ooops ...</h3>
       <h4>404 - Page Not Found</h4>

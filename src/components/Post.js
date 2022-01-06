@@ -11,7 +11,7 @@ import Helmet from './Helmet'
 import { isUrlValid } from '../utils/helpers'
 import PageNotFound from './PageNotFound'
 import remarkGfm from 'remark-gfm'
-import { styles } from '../utils/styles'
+import { styles } from '../styles/styles'
 
 const Post = () => {
   const posts = useSelector(state => state.blog.posts)

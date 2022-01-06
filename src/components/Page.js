@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
-import { Col, Container, Nav, Tab } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getPage } from '../services/blog'
@@ -11,7 +11,10 @@ import remarkGfm from 'remark-gfm'
 import { getConfig } from '../services/blog'
 import { setPages, setGroups } from '../features/configSlice'
 import PageNotFound from './PageNotFound'
-import { styles } from '../utils/styles'
+import { styles } from '../styles/styles'
+import { navScrollEvent } from '../utils/helpers'
+import Navigation from './Navigation'
+import MobileNavigation from './MobileNavigation'
 
 const Page = ({ main }) => {
   const [data, setData] = useState(undefined)
@@ -25,20 +28,7 @@ const Page = ({ main }) => {
   const [notFound, setNotFound] = useState(false)
   const dark = useSelector(state => state.config.dark)
 
-  useEffect(() => {
-    window.onscroll = () => {
-      const element = document.getElementById('sticky-col')
-      if (element && window.pageYOffset > 50) {
-        element.style.position = 'fixed'
-        element.style.top = 0
-        element.style.marginTop = '30px'
-      } else {
-        element.style.position = 'static'
-        element.style.top = 'initial'
-        element.style.marginTop = 0
-      }
-    }
-  }, [])
+  useEffect(navScrollEvent)
 
   useEffect(async () => {
     setNotFound(false)
@@ -75,11 +65,13 @@ const Page = ({ main }) => {
   if(notFound) return <PageNotFound />
 
   if (!data) return <></>
+  const param = main ? 'main' : params['page']
 
   return (
-    <Container className='separator'>
+    <Container className='separator' style={{ color: dark ? styles.white : styles.dark }}>
       <Helmet meta={data.meta} />
-      <Container className='page' style={{ color: dark ? styles.white : styles.dark }}>
+      <Container className='page'>
+        <MobileNavigation activeKey={param} config={config} />
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
         >
@@ -87,20 +79,7 @@ const Page = ({ main }) => {
         </ReactMarkdown>
       </Container>
       <Container className='tab'>
-        <Tab.Container activeKey={main ? 'main' : params['page']} >
-          {config &&
-            <Col id="sticky-col">
-              <h4 id="sticky-col-head">Navigation</h4>
-              <Nav variant="pills" className="flex-row" style={{ width: 276, maxHeight: '50vw', overflowY: 'auto', overflowX: 'hidden' }}>
-                {config.map((c, i) => {
-                  return <Nav.Item key={i} style={{ width: 256 }}>
-                    <Nav.Link className="tab-link" eventKey={c.file} onClick={() => navigate(`/pages/${c.file}`)}>{c.title}</Nav.Link>
-                  </Nav.Item>
-                })}
-              </Nav>
-            </Col>
-          }
-        </Tab.Container>
+        <Navigation activeKey={param} config={config}/>
       </Container>
     </Container>
   )

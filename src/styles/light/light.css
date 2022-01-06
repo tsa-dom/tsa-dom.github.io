@@ -1,0 +1,53 @@
+/* width */
+body::-webkit-scrollbar {
+  width: 12px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(136, 136, 136);
+  border-radius: 100px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(208, 208, 208);
+  border-radius: 100px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+.btn.btn-light {
+  background-color: rgb(208, 208, 208);
+}
+
+.nav-link.mobile-link {
+  color: rgb(30, 30, 30) !important;
+}
+
+.nav-link.mobile-link.active {
+  color: rgb(30, 30, 30) !important;
+}
+
+.accordion-button {
+  background-color: rgb(208, 208, 208) !important;
+  color:black !important;
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+button.accordion-button.collapsed::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23000000%27%3e%3cpath fill-rule=%27evenodd%27 d=%27M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z%27/%3e%3c/svg%3e") !important;
+}
+
+button.accordion-button::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27 fill=%27%23000000%27%3e%3cpath fill-rule=%27evenodd%27 d=%27M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z%27/%3e%3c/svg%3e") !important;
+}

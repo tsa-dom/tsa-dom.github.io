@@ -1,6 +1,6 @@
 export const styles = {
   white: 'rgb(248, 249, 250)',
-  black: 'black',
+  black: 'rgb(18, 18, 18)',
   mobileMenuButton: {
     width: '100%',
     fontSize: 20,
@@ -13,6 +13,6 @@ export const styles = {
   },
   light: {
     backgroundColor: 'white',
-    color: 'black'
+    color: 'rgb(18, 18, 18)'
   }
 }

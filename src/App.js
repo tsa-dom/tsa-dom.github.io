@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import MenuBar from './components/MenuBar'
 import Post from './components/Post'
@@ -9,6 +9,8 @@ import Blog from './components/Blog'
 import Page from './components/Page'
 import clsx from 'clsx'
 import { useSelector } from 'react-redux'
+const DarkTheme = lazy(() => import('./styles/dark/Dark'))
+const LightTheme = lazy(() => import('./styles/light/Light'))
 
 const App = () => {
   const dark = useSelector(state => state.config.dark)
@@ -18,6 +20,10 @@ const App = () => {
 
   return (
     <div className={clsx({ 'body-dark': dark })}>
+      <Suspense fallback={<></>}>
+        {dark && <DarkTheme />}
+        {!dark && <LightTheme />}
+      </Suspense>
       <MenuBar />
       <Routes>
         <Route path="/pages/:page" element={<Page />} />
