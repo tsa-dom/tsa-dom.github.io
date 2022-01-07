@@ -13,10 +13,17 @@ const PostListMobile = ({ posts }) => {
     <Accordion className='posts-mobile'>
       {posts.map((post, i) => {
         return (
-          <Accordion.Item style={{ backgroundColor: styles.black }} key={i} eventKey={i}>
+          <Accordion.Item style={{
+            backgroundColor: dark ? styles.black : styles.white,
+            borderStyle: 'none'
+          }} key={i} eventKey={i}>
             <Accordion.Header>{post.title}</Accordion.Header>
-            <Accordion.Body style={{ backgroundColor: 'rgb(33,37,41)', marginTop: -10, marginBottom: 10 }} >
-              <Card style={{ marginTop: -10 }} border="dark" text={dark ? 'light' : 'dark' } bg={dark ? 'dark' : 'light'}>
+            <Accordion.Body style={{
+              backgroundColor: dark ? 'rgb(33,37,41)' : 'rgb(248,249,250)',
+              marginTop: -10,
+              marginBottom: 10,
+            }} >
+              <Card style={{ marginTop: -10 }} border="light" text={dark ? 'light' : 'dark' } bg={dark ? 'dark' : 'light'}>
                 <Card.Body>
                   <Card.Text>{post.description}</Card.Text>
                   <Button
