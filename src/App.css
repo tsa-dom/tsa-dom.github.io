@@ -38,13 +38,40 @@
   .nav-container {
     visibility: hidden !important;
   }
+  .posts-mobile {
+    visibility: visible !important; 
+    display: initial !important;
+  }
+  .posts {
+    visibility: hidden !important;
+    display: none !important;  
+  }
+}
+
+.posts-mobile {
+  visibility: hidden;
+  display: none;  
+}
+
+.posts {
+  visibility: visible; 
+    display: initial;
 }
 
 .mobile-hamburger {
   visibility: hidden;
 }
 
+.mobile-menu {
+  visibility: hidden;
+  display: none;
+}
+
 @media only screen and (max-width: 1040px) {
+  .mobile-menu {
+    visibility: visible;
+    display: initial;
+  }
   .nav-container {
     margin-left: -15px !important;
     margin-right: 0 !important;
@@ -63,10 +90,6 @@
   }
   .menu {
     overflow: hidden !important;
-  }
-  .logo-text {
-    visibility: hidden !important;
-    display: none !important;
   }
 }
 

@@ -19,7 +19,7 @@ const MobileMenu = ({ open, setOpen }) => {
       show={open}
       onHide={() => setOpen(false)}
       placement='start'
-      style={{ marginTop: 50, height: window.innerHeight - 49, ...mode }}
+      style={{ marginTop: 50, height: window.innerHeight - 49, ...mode, width: window.innerWidth }}
       backdrop={false}
     >
       <Offcanvas.Header>
