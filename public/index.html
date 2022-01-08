@@ -55,6 +55,7 @@
     </script>
   </head>
   <body>
+    <div id="root"></div>
     <noscript>
       <div id="menu-nav">
         <a class="menu-link" href="https://tsa-dom.github.io">Home</a>
@@ -68,7 +69,7 @@
         #container {
           margin: auto;
           max-width: 700px;
-          font-size: 30px;
+          font-size: 20px;
           margin-top: 30px;
         }
         body {
@@ -91,9 +92,12 @@
         .menu-link:hover {
           color: grey !important
         }
+        #root {
+          display: none !important;
+          visibility: hidden !important;
+        }
       </style>
     </noscript>
-    <div id="root"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
