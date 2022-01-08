@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/510.9c92f431.chunk.js","mappings":"0KAMA,EAFc,kBAAM","sources":["styles/light/Light.js"],"sourcesContent":["import React from 'react'\n\nimport './light.css'\n\nconst Light = () => <></>\n\nexport default Light"],"names":[],"sourceRoot":""}
