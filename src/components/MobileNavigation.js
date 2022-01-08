@@ -12,12 +12,12 @@ const MobileNavigation = ({ config, activeKey }) => {
   const title = conf.title
 
   return (
-    <Accordion className="mobile-menu" style={{ marginTop: -15 }}>
+    <Accordion className="mobile-menu">
       <Accordion.Header>{title}</Accordion.Header>
       <Accordion.Body>
         <Tab.Container activeKey={activeKey}>
           {config &&
-            <Nav variant="pills" className="flex-row" style={{ marginTop: -15 }}>
+            <Nav variant="pills" className="flex-row">
               {[...config].sort((a, b) => a.priority - b.priority).map((c, i) => {
                 return <Nav.Item key={i} style={{ width: '100%' }}>
                   <Nav.Link className="mobile-link" eventKey={c.file} onClick={() => navigate(`/pages/${c.file}`)}>{c.title}</Nav.Link>

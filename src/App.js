@@ -1,29 +1,23 @@
-import React, { lazy, Suspense, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import MenuBar from './components/MenuBar'
 import Post from './components/Post'
 import PageNotFound from './components/PageNotFound'
 import './App.css'
-import './Dark.css'
 import Blog from './components/Blog'
 import Page from './components/Page'
-import clsx from 'clsx'
 import { useSelector } from 'react-redux'
-const DarkTheme = lazy(() => import('./styles/dark/Dark'))
-const LightTheme = lazy(() => import('./styles/light/Light'))
+import { updateStyles } from './utils/helpers'
 
 const App = () => {
   const dark = useSelector(state => state.config.dark)
   useEffect(() => {
     document.body.style.backgroundColor = dark ? 'rgb(18, 18, 18)' : 'white'
+    updateStyles(dark)
   }, [dark])
 
   return (
-    <div className={clsx({ 'body-dark': dark })}>
-      <Suspense fallback={<></>}>
-        {dark && <DarkTheme />}
-        {!dark && <LightTheme />}
-      </Suspense>
+    <div>
       <MenuBar />
       <Routes>
         <Route path="/pages/:page" element={<Page />} />

@@ -9,10 +9,14 @@ export const styles = {
   },
   dark: {
     backgroundColor: 'rgb(18, 18, 18)',
-    color: 'rgb(248, 249, 250)'
+    color: 'rgb(248, 249, 250)',
+    accordionButtonColor: 'rgb(30, 30, 30)',
+    bootstrap: 'rgb(33,37,41)'
   },
   light: {
     backgroundColor: 'white',
-    color: 'rgb(18, 18, 18)'
-  }
+    color: 'rgb(18, 18, 18)',
+    accordionButtonColor: 'rgb(208, 208, 208)',
+    bootstrap: 'rgb(248,249,250)'
+  },
 }

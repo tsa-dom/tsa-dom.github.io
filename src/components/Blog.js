@@ -9,7 +9,6 @@ import PostList from './PostList'
 const Blog = () => {
   const config = useSelector(state => state.config.blog)
   const dispatch = useDispatch()
-  const dark = useSelector(state => state.config.dark)
 
   useEffect(async () => {
     if (!config) {
@@ -22,7 +21,7 @@ const Blog = () => {
   const sortedPosts = [...config].sort((a, b) => new Date(b.created) - new Date(a.created))
 
   return (
-    <Container className='page-card' style={{ color: dark ? 'rgb(230, 230, 230)' : 'black' }}>
+    <Container className='page-card'>
       <h4 style={{ marginBottom: 15, marginTop: -5 }}>All blog posts</h4>
       <PostListMobile posts={sortedPosts} />
       <PostList posts={sortedPosts} />

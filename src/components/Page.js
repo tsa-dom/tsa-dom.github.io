@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
@@ -11,7 +10,6 @@ import remarkGfm from 'remark-gfm'
 import { getConfig } from '../services/blog'
 import { setPages, setGroups } from '../features/configSlice'
 import PageNotFound from './PageNotFound'
-import { styles } from '../styles/styles'
 import { navScrollEvent } from '../utils/helpers'
 import Navigation from './Navigation'
 import MobileNavigation from './MobileNavigation'
@@ -26,7 +24,6 @@ const Page = ({ main }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [notFound, setNotFound] = useState(false)
-  const dark = useSelector(state => state.config.dark)
 
   useEffect(navScrollEvent)
 
@@ -68,7 +65,7 @@ const Page = ({ main }) => {
   const param = main ? 'main' : params['page']
 
   return (
-    <Container className='separator' style={{ color: dark ? styles.white : styles.dark }}>
+    <Container className='separator'>
       <Helmet meta={data.meta} />
       <Container className='page'>
         <MobileNavigation activeKey={param} config={config} />
