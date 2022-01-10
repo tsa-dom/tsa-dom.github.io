@@ -4,32 +4,48 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useParams } from 'react-router-dom'
-import { getPost } from '../services/blog'
+import { getConfig, getPost } from '../services/blog'
 import { useSelector, useDispatch } from 'react-redux'
 import { addPost } from '../features/blogSlice'
 import Helmet from './Helmet'
 import { isUrlValid } from '../utils/helpers'
 import PageNotFound from './PageNotFound'
 import remarkGfm from 'remark-gfm'
+import Navigation from './Navigation'
+import { setResources } from '../features/configSlice'
+import MobileNavigation from './MobileNavigation'
 
-const Post = () => {
+const Post = ({ namespaced }) => {
   const posts = useSelector(state => state.blog.posts)
+  const resourceConfig = useSelector(state => state.config.resources)
   const [data, setData] = useState(undefined)
   const params = useParams()
   const dispatch = useDispatch()
   const [notFound, setNotFound] = useState(false)
+  const file = namespaced ? `${params['namespace']}/${params['post']}` : params['post']
+  const [config, setConfig] = useState(undefined)
 
   useEffect(async () => {
-    const post = posts.find(p => p.file === params['post'])
+    if (!resourceConfig) {
+      const conf = await getConfig('resources')
+      dispatch(setResources(conf))
+    }
+    const post = posts.find(p => p.file === file)
     if (post) setData(post)
     else {
-      const source = await getPost(params['post'])
+      const source = await getPost(file)
       if (source) {
         dispatch(addPost(source))
         setData(source)
       } else setNotFound(true)
     }
   }, [notFound])
+
+  useEffect(() => {
+    if (data && resourceConfig) {
+      setConfig(resourceConfig[params['namespace']])
+    }
+  }, [setConfig, data])
 
   if (notFound) return <PageNotFound />
 
@@ -40,6 +56,8 @@ const Post = () => {
     <Container className='separator'>
       <Helmet meta={data.meta} />
       <Container className='page'>
+        <MobileNavigation activeKey={file} config={config} path='blog' />
+        <hr className="mobile" />
         {data.markdown.split('```').map((r, i) => {
           const lang = r.split('\n')[0]
           if (acceptedLangs.includes(lang)) {
@@ -73,6 +91,9 @@ const Post = () => {
             })
           }
         })}
+      </Container>
+      <Container className='tab'>
+        <Navigation activeKey={file} config={config} path='blog' />
       </Container>
     </Container>
   )

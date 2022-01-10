@@ -8,11 +8,12 @@ import Blog from './components/Blog'
 import Page from './components/Page'
 import { useSelector } from 'react-redux'
 import { updateStyles } from './utils/helpers'
+import { styles } from './styles/styles'
 
 const App = () => {
   const dark = useSelector(state => state.config.dark)
   useEffect(() => {
-    document.body.style.backgroundColor = dark ? 'rgb(18, 18, 18)' : 'white'
+    document.body.style.backgroundColor = dark ? styles.dark.backgroundColor : styles.light.backgroundColor
     updateStyles(dark)
   }, [dark])
 
@@ -22,6 +23,7 @@ const App = () => {
       <Routes>
         <Route path="/pages/:page" element={<Page />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:namespace/:post" element={<Post namespaced />} />
         <Route path="/blog/:post" element={<Post />} />
         <Route path="/not-found" element={<PageNotFound />}/>
         <Route path="/" element={<Page main />} />

@@ -16,7 +16,7 @@ const PageNotFound = () => {
     <div style={{
       textAlign: 'center',
       marginTop: window.innerHeight / 6,
-      color: dark ? styles.white : styles.black
+      color: dark ? styles.dark.color : styles.light.color
     }}>
       <h3>... Ooops ...</h3>
       <h4>404 - Page Not Found</h4>

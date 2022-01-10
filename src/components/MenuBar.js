@@ -28,10 +28,14 @@ const MenuBar = () => {
           <Nav.Link className='nav-button' onClick={() => navigate('/blog')}>Blog</Nav.Link>
           <Nav.Link className='nav-button' onClick={() => navigate('/pages/contributors')}>Contributors</Nav.Link>
         </Nav>
-        <Nav.Link style={{ position: 'absolute', right: 0 }} onClick={() => dispatch(setDarkMode(!dark))}>
+        <Nav.Link style={{ position: 'absolute', right: 0, cursor: 'initial' }}>
           {dark && <BsMoonStarsFill style={{ color: 'white', marginTop: -5 }}/>}
           {!dark && <BsSunFill style={{ color: 'white', marginTop: -5 }}/>}
-          <span className="switch" style={{ marginLeft: 10 }}>
+          <span
+            className="switch"
+            style={{ marginLeft: 10 }}
+            onClick={() => dispatch(setDarkMode(!dark))}
+          >
             <input
               style={{ visibility: 'hidden' }}
               checked={dark}
