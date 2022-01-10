@@ -69,6 +69,7 @@ const Page = ({ main }) => {
       <Helmet meta={data.meta} />
       <Container className='page'>
         <MobileNavigation activeKey={param} config={config} />
+        <hr className="mobile" />
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
         >
