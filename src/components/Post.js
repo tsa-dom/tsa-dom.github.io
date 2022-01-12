@@ -50,7 +50,7 @@ const Post = ({ namespaced }) => {
   if (notFound) return <PageNotFound />
 
   if (!data) return <></>
-  const acceptedLangs = ['jsx']
+  const acceptedLangs = ['jsx', 'css']
 
   return (
     <Container className='separator'>

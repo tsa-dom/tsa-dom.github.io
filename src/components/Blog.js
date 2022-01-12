@@ -22,7 +22,7 @@ const Blog = () => {
 
   return (
     <Container className='page-card'>
-      <h4 style={{ marginBottom: 15, marginTop: -5 }}>All blog posts</h4>
+      <h4 style={{ marginBottom: 15 }}>All blog posts</h4>
       <PostListMobile posts={sortedPosts} />
       <PostList posts={sortedPosts} />
     </Container>
