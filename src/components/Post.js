@@ -83,7 +83,7 @@ const Post = ({ namespaced }) => {
                   {e.value}
                 </ReactMarkdown>
               } else if (e.type === 'youtube') {
-                return <YouTube id={e.value} />
+                return <YouTube key={j} id={e.value} />
               }
             })
           }
