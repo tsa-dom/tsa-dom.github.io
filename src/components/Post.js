@@ -14,7 +14,7 @@ import Navigation from './Navigation'
 import { setResources } from '../features/configSlice'
 import MobileNavigation from './MobileNavigation'
 import YouTube from './YouTube'
-import { textAndTypes } from '../utils/helpers'
+import { isValidUrl, textAndTypes } from '../utils/helpers'
 
 const Post = ({ namespaced }) => {
   const posts = useSelector(state => state.blog.posts)
@@ -40,7 +40,7 @@ const Post = ({ namespaced }) => {
         setData(source)
       } else setNotFound(true)
     }
-  }, [notFound])
+  }, [notFound, window.location.href])
 
   useEffect(() => {
     if (data && resourceConfig) {
@@ -84,6 +84,8 @@ const Post = ({ namespaced }) => {
                 </ReactMarkdown>
               } else if (e.type === 'youtube') {
                 return <YouTube key={j} id={e.value} />
+              } else if (e.type === 'image' && isValidUrl(e.value)) {
+                return <img style={{ width: '100%' }} key={j} src={e.value} />
               }
             })
           }
@@ -97,37 +99,3 @@ const Post = ({ namespaced }) => {
 }
 
 export default Post
-
-/* {data.markdown.split('```').map((r, i) => {
-  const lang = r.split('\n')[0]
-  if (acceptedLangs.includes(lang)) {
-    const code = r.substr(lang.length + 1, r.length - 5)
-    return (
-      <SyntaxHighlighter
-        key={i}
-        language={lang}
-        style={vscDarkPlus}
-        wrapLines={true}
-      //lineProps={{ style: { wordBreak: 'break-all', whiteSpace: 'pre-wrap' } }}
-      >{code}</SyntaxHighlighter>
-    )
-  } else {
-    const pieces = r.split('<img src="').map(p => p.split('">')).flat(1)
-    return pieces.map((p, j) => {
-      if (isUrlValid(p)) {
-        return (
-          <div key={j} style={{ textAlign: 'center', marginBottom: 20 }}>
-            <img src={p} style={{ maxWidth: '100%' }} />
-          </div>
-        )
-      } else {
-        return <ReactMarkdown
-          key={j}
-          remarkPlugins={[remarkGfm]}
-        >
-          {p}
-        </ReactMarkdown>
-      }
-    })
-  }
-})} */

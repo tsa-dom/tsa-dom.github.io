@@ -15,7 +15,7 @@ export const textAndTypes = (text) => {
   return values
 }
 
-export const isUrlValid = str => {
+export const isValidUrl = str => {
   try {
     new URL(str)
     return true

@@ -28,23 +28,25 @@ const MenuBar = () => {
           <Nav.Link className='nav-button' onClick={() => navigate('/blog')}>Blog</Nav.Link>
           <Nav.Link className='nav-button' onClick={() => navigate('/pages/contributors')}>Contributors</Nav.Link>
         </Nav>
-        <Nav.Link style={{ position: 'absolute', right: 0, cursor: 'initial' }}>
-          {dark && <BsMoonStarsFill style={{ color: 'white', marginTop: -5 }}/>}
-          {!dark && <BsSunFill style={{ color: 'white', marginTop: -5 }}/>}
-          <span
-            className="switch"
-            style={{ marginLeft: 10 }}
-            onClick={() => dispatch(setDarkMode(!dark))}
-          >
-            <input
-              style={{ visibility: 'hidden' }}
-              checked={dark}
-              type="checkbox"
-              onChange={() => {}}
-            />
-            <div className="slider round"></div>
-          </span>
-        </Nav.Link>
+        <div style={{ position: 'relative' }}>
+          <Nav.Link style={{ position: 'absolute', right: 0, cursor: 'initial', marginRight: -30 }}>
+            {dark && <BsMoonStarsFill style={{ color: 'white', marginTop: -5 }}/>}
+            {!dark && <BsSunFill style={{ color: 'white', marginTop: -5 }}/>}
+            <span
+              className="switch"
+              style={{ marginLeft: 10 }}
+              onClick={() => dispatch(setDarkMode(!dark))}
+            >
+              <input
+                style={{ visibility: 'hidden' }}
+                checked={dark}
+                type="checkbox"
+                onChange={() => {}}
+              />
+              <div className="slider round"></div>
+            </span>
+          </Nav.Link>
+        </div>
         <div style={{ paddingTop: 2 }} className='mobile-hamburger'>
           <Hamburger color='white' toggled={open} toggle={setOpen} />
           <MobileMenu open={open} setOpen={setOpen} />
