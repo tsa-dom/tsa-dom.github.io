@@ -1,5 +1,20 @@
 import { styles } from '../styles/styles'
 
+export const textAndTypes = (text) => {
+  const values = []
+
+  text.split('<').map((p, i) => {
+    if (i > 0) {
+      const separator = p.split('/>')
+      const embed = separator[0].split(' ')
+      values.push({ type: embed[0], value: embed[1] })
+      values.push({ type: 'md', value: separator[1] })
+    } else values.push({ type: 'md', value: p })
+  })
+
+  return values
+}
+
 export const isUrlValid = str => {
   try {
     new URL(str)

@@ -45,6 +45,12 @@
   position: absolute;
 }
 
+
+.youtube {
+  width: 100%;
+  height: 395px
+}
+
 @media (max-width: 450px) {
   .mobile-hamburger {
     visibility: visible !important;
@@ -112,6 +118,13 @@
   }
   .menu {
     overflow: hidden !important;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  .youtube {
+    width: 100%;
+    height: 200px;
   }
 }
 
