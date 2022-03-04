@@ -29,7 +29,7 @@ const MenuBar = () => {
           <Nav.Link className='nav-button' onClick={() => navigate('/pages/contributors')}>Contributors</Nav.Link>
         </Nav>
         <div style={{ position: 'relative' }}>
-          <Nav.Link style={{ position: 'absolute', right: 0, cursor: 'initial', marginRight: -30 }}>
+          <Nav.Link style={{ position: 'absolute', right: 0, cursor: 'initial', marginRight: -25 }}>
             {dark && <BsMoonStarsFill style={{ color: 'white', marginTop: -5 }}/>}
             {!dark && <BsSunFill style={{ color: 'white', marginTop: -5 }}/>}
             <span
