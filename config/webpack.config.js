@@ -567,7 +567,34 @@ module.exports = function (webpackEnv) {
           {},
           {
             inject: true,
+            filename: 'index.html',
             template: paths.appHtml,
+          },
+          isEnvProduction
+            ? {
+              minify: {
+                removeComments: true,
+                collapseWhitespace: true,
+                removeRedundantAttributes: true,
+                useShortDoctype: true,
+                removeEmptyAttributes: true,
+                removeStyleLinkTypeAttributes: true,
+                keepClosingSlash: true,
+                minifyJS: true,
+                minifyCSS: true,
+                minifyURLs: true,
+              },
+            }
+            : undefined
+        )
+      ),
+      new HtmlWebpackPlugin(
+        Object.assign(
+          {},
+          {
+            inject: true,
+            filename: 'test.html',
+            template: paths.appTestHtml,
           },
           isEnvProduction
             ? {
