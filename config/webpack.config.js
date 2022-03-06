@@ -27,6 +27,7 @@ const ForkTsCheckerWebpackPlugin =
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const createEnvironmentHash = require('./webpack/persistentCache/createEnvironmentHash')
+const { htmlPlugins } = require('./generated')
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false'
@@ -90,6 +91,36 @@ const hasJsxRuntime = (() => {
 module.exports = function (webpackEnv) {
   const isEnvDevelopment = webpackEnv === 'development'
   const isEnvProduction = webpackEnv === 'production'
+
+  let htmlWebpackPlugins = []
+  htmlPlugins.forEach(p => {
+    htmlWebpackPlugins.push(new HtmlWebpackPlugin(
+      Object.assign(
+        {},
+        {
+          inject: true,
+          filename: p.filename,
+          template: p.template,
+        },
+        isEnvProduction
+          ? {
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true,
+            },
+          }
+          : undefined
+      )
+    ))
+  })
 
   // Variable used for enabling profiling in Production
   // passed into alias object. Uses a flag if passed into the build command
@@ -562,58 +593,7 @@ module.exports = function (webpackEnv) {
     },
     plugins: [
       // Generates an `index.html` file with the <script> injected.
-      new HtmlWebpackPlugin(
-        Object.assign(
-          {},
-          {
-            inject: true,
-            filename: 'index.html',
-            template: paths.appHtml,
-          },
-          isEnvProduction
-            ? {
-              minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true,
-              },
-            }
-            : undefined
-        )
-      ),
-      new HtmlWebpackPlugin(
-        Object.assign(
-          {},
-          {
-            inject: true,
-            filename: 'test.html',
-            template: paths.appTestHtml,
-          },
-          isEnvProduction
-            ? {
-              minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true,
-              },
-            }
-            : undefined
-        )
-      ),
+      ...htmlWebpackPlugins,
       // Inlines the webpack runtime script. This script is too small to warrant
       // a network request.
       // https://github.com/facebook/create-react-app/issues/5358
