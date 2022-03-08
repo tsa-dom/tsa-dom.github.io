@@ -3,7 +3,7 @@ import React from 'react'
 const YouTube = ({ id }) => {
 
   return (
-    <div className='video-responsive'>
+    <div className='video'>
       <iframe
         className='youtube'
         src={`https://www.youtube.com/embed/${id}`}
