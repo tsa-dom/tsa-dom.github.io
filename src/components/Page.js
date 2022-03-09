@@ -15,65 +15,40 @@ import Navigation from './Navigation'
 import MobileNavigation from './MobileNavigation'
 
 const Page = ({ main }) => {
-  const [data, setData] = useState(undefined)
-  const pages = useSelector(state => state.pages.entries)
-  const pageConfig = useSelector(state => state.config.pages)
-  const groupConfig = useSelector(state => state.config.groups)
-  const [config, setConfig] = useState(undefined)
   const params = useParams()
+  const param = main ? 'main' : params['page']
+  const page = useSelector(state => state.pages.entries.find(p => p.file === param))
+  const config = useSelector(state => {
+    const conf = state.config
+    return conf?.groups?.[conf?.pages.find(c => c.file === param)?.group]
+  })
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const [notFound, setNotFound] = useState(false)
+  const exec = useDispatch()
+  const [pageNotFound, setPageNotFound] = useState(false)
 
   useEffect(navScrollEvent)
 
   useEffect(async () => {
-    setNotFound(false)
-    if (!pageConfig) {
-      const conf = await getConfig('pages')
-      dispatch(setPages(conf))
-    }
-    if (!groupConfig) {
-      const conf = await getConfig('groups')
-      dispatch(setGroups(conf))
-    }
-    const fileName = main ? 'main' : params['page']
-    if (params['page'] === 'main') navigate('/')
-    const page = pages.find(p => p.file === fileName)
-    if (page) setData(page)
-    else {
-      const source = await getPage(fileName)
-      if (source) {
-        dispatch(addPage(source))
-        setData(source)
-      } else setNotFound(true)
-    }
+    params['page'] === 'main' && navigate('/')
+    setPageNotFound(false)
+    !config && exec(setPages(await getConfig('pages')))
+    !config && exec(setGroups(await getConfig('groups')))
+    const source = await getPage(param)
+    source ? exec(addPage(source)) : setPageNotFound(true)
   }, [params])
 
-  useEffect(() => {
-    if (data && pageConfig && groupConfig) {
-      const page = pageConfig.find(c => c.file === data.file)
-      if (page) {
-        setConfig(groupConfig[page.group])
-      } else setConfig(undefined)
-    }
-  }, [setConfig, data])
+  if(pageNotFound) return <PageNotFound />
 
-  if(notFound) return <PageNotFound />
-
-  if (!data) return <></>
-  const param = main ? 'main' : params['page']
+  if (!page) return <></>
 
   return (
     <Container className='separator'>
-      <Helmet meta={data.meta} />
+      <Helmet meta={page.meta} />
       <Container className='page'>
         <MobileNavigation activeKey={param} config={config} />
         <hr className="mobile" />
-        <ReactMarkdown
-          remarkPlugins={[remarkGfm]}
-        >
-          {data.markdown}
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {page.markdown}
         </ReactMarkdown>
       </Container>
       <Container className='tab'>

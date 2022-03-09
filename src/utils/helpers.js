@@ -70,6 +70,7 @@ export const updateStyles = (dark) => {
     styleVar('--accordion-button-color', styles.white)
     styleVar('--bootstrap-colors', styles.dark.bootstrap)
     styleVar('--common-color-pair2', styles.white)
+    styleVar('--accordion-button-after-url', styles.dark.accordionAfterUrl)
   } else {
     styleVar('--scrollbar-color', 'rgb(136, 136, 136)')
     styleVar('--scrollbar-color-hover', 'rgb(208, 208, 208)')
@@ -81,5 +82,6 @@ export const updateStyles = (dark) => {
     styleVar('--accordion-button-color', styles.black)
     styleVar('--bootstrap-colors', styles.light.bootstrap)
     styleVar('--common-color-pair2', styles.black)
+    styleVar('--accordion-button-after-url', styles.light.accordionAfterUrl)
   }
 }

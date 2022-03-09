@@ -8,14 +8,9 @@ import PostList from './PostList'
 
 const Blog = () => {
   const config = useSelector(state => state.config.blog)
-  const dispatch = useDispatch()
+  const exec = useDispatch()
 
-  useEffect(async () => {
-    if (!config) {
-      const conf = await getConfig('blog')
-      dispatch(setBlog(conf))
-    }
-  }, [])
+  useEffect(async () => !config && exec(setBlog(await getConfig('blog'))), [])
 
   if (!config) return <></>
   const sortedPosts = [...config].sort((a, b) => new Date(b.created) - new Date(a.created))

@@ -3,22 +3,14 @@ import { Container, Nav } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import Hamburger from 'hamburger-react'
 import MobileMenu from './MobileMenu'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
-import { setDarkMode } from '../features/configSlice'
-import { BsMoonStarsFill, BsSunFill } from 'react-icons/bs'
+import DarkLightButton from './DarkLightButton'
+
 
 const MenuBar = () => {
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
-  const dark = useSelector(state => state.config.dark)
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    window.onresize = () => {
-      if (window.innerWidth > 450) setOpen(false)
-    }
-  }, [])
+  useEffect(() => window.onresize = () => window.innerWidth > 450 && setOpen(false), [])
 
   return (
     <div className='menu'>
@@ -29,25 +21,11 @@ const MenuBar = () => {
           <Nav.Link className='nav-button' onClick={() => navigate('/pages/contributors')}>Contributors</Nav.Link>
         </Nav>
         <div style={{ position: 'relative' }}>
-          <Nav.Link style={{ position: 'absolute', right: 0, cursor: 'initial', marginRight: -25 }}>
-            {dark && <BsMoonStarsFill style={{ color: 'white', marginTop: -5 }}/>}
-            {!dark && <BsSunFill style={{ color: 'white', marginTop: -5 }}/>}
-            <span
-              className="switch"
-              style={{ marginLeft: 10 }}
-              onClick={() => dispatch(setDarkMode(!dark))}
-            >
-              <input
-                style={{ visibility: 'hidden' }}
-                checked={dark}
-                type="checkbox"
-                onChange={() => {}}
-              />
-              <div className="slider round"></div>
-            </span>
+          <Nav.Link className='nav-button-dark'>
+            <DarkLightButton />
           </Nav.Link>
         </div>
-        <div style={{ paddingTop: 2 }} className='mobile-hamburger'>
+        <div className='mobile-hamburger'>
           <Hamburger color='white' toggled={open} toggle={setOpen} />
           <MobileMenu open={open} setOpen={setOpen} />
         </div>

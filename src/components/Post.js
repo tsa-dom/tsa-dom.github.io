@@ -17,49 +17,32 @@ import YouTube from './YouTube'
 import { isValidUrl, textAndTypes } from '../utils/helpers'
 
 const Post = ({ namespaced }) => {
-  const posts = useSelector(state => state.blog.posts)
-  const resourceConfig = useSelector(state => state.config.resources)
-  const [data, setData] = useState(undefined)
   const params = useParams()
-  const dispatch = useDispatch()
-  const [notFound, setNotFound] = useState(false)
   const file = namespaced ? `${params['namespace']}/${params['post']}` : params['post']
-  const [config, setConfig] = useState(undefined)
+  const post = useSelector(state => state.blog.posts.find(p => p.file === file))
+  const config = useSelector(state => state.config?.resources?.[params['namespace']])
+  const exec = useDispatch()
+  const [pageNotFound, setPageNotFound] = useState(false)
 
   useEffect(async () => {
-    if (!resourceConfig) {
-      const conf = await getConfig('resources')
-      dispatch(setResources(conf))
-    }
-    const post = posts.find(p => p.file === file)
-    if (post) setData(post)
-    else {
-      const source = await getPost(file)
-      if (source) {
-        dispatch(addPost(source))
-        setData(source)
-      } else setNotFound(true)
-    }
-  }, [notFound, window.location.href])
+    setPageNotFound(false)
+    !config && exec(setResources(await getConfig('resources')))
+    const source = await getPost(file)
+    source ? exec(addPost(source)) : setPageNotFound(true)
+  }, [window.location.href])
 
-  useEffect(() => {
-    if (data && resourceConfig) {
-      setConfig(resourceConfig[params['namespace']])
-    }
-  }, [setConfig, data])
+  if (pageNotFound) return <PageNotFound />
 
-  if (notFound) return <PageNotFound />
-
-  if (!data) return <></>
+  if (!post) return <></>
   const acceptedLangs = ['jsx', 'css']
 
   return (
     <Container className='separator'>
-      <Helmet meta={data.meta} />
+      <Helmet meta={post.meta} />
       <Container className='page'>
         <MobileNavigation activeKey={file} config={config} path='blog' />
         <hr className="mobile" />
-        {data.markdown.split('```').map((r, i) => {
+        {post.markdown.split('```').map((r, i) => {
           const lang = r.split('\n')[0]
           if (acceptedLangs.includes(lang)) {
             const code = r.substr(lang.length + 1, r.length - 5)

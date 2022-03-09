@@ -8,10 +8,6 @@ const PageNotFound = () => {
   const navigate = useNavigate()
   const dark = useSelector(state => state.config.dark)
 
-  const handleToMainPage = () => {
-    navigate('/')
-  }
-
   return (
     <div style={{
       textAlign: 'center',
@@ -25,7 +21,7 @@ const PageNotFound = () => {
       <div>does not exist...</div>
       <Button
         style={{ marginTop: 20, backgroundColor: 'rgb(45, 185, 143)', color: 'black', fontSize: 16 }}
-        onClick={handleToMainPage}
+        onClick={() => navigate('/')}
       >
         Back to main page
       </Button>
