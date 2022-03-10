@@ -2,7 +2,7 @@ import React from 'react'
 import { Accordion, Button, Card } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getPublishedText } from '../utils/helpers'
+import { getPublishedText } from '../../utils/helpers'
 
 const PostListMobile = ({ posts }) => {
   const dark = useSelector(state => state.config.dark)

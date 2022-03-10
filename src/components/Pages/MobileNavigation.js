@@ -2,7 +2,7 @@ import React from 'react'
 import { Accordion, Nav, Tab } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
-const MobileNavigation = ({ config, activeKey, path='pages' }) => {
+const MobileNavigation = ({ config, activeKey, path }) => {
   const navigate = useNavigate()
 
   if (!config) return <></>

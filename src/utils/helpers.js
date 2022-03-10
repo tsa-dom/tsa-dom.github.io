@@ -1,4 +1,4 @@
-import { styles } from '../styles/styles'
+import { css } from '../styles/cssVars'
 
 export const textAndTypes = (text) => {
   const values = []
@@ -48,9 +48,11 @@ export const getPublishedText = (created) => {
     ? 'Published today'
     : diffDays < 30
       ? `Published ${diffDays} days ago`
-      : diffMonths < 12
-        ? `Published ${diffMonths} months ago`
-        : `Published ${diffYears} years ago`
+      : diffMonths === 1
+        ? 'Published month ago'
+        : diffMonths < 12
+          ? `Published ${diffMonths} months ago`
+          : `Published ${diffYears} years ago`
   return publishText
 }
 
@@ -59,29 +61,7 @@ export const styleVar = (variable, style) => {
 }
 
 export const updateStyles = (dark) => {
-  if (dark) {
-    styleVar('--scrollbar-color', 'rgb(208, 208, 208)')
-    styleVar('--scrollbar-color-hover', 'rgb(136, 136, 136)')
-    styleVar('--scrollbar-background', styles.dark.backgroundColor)
-    styleVar('--separator-text-color', styles.dark.color)
-    styleVar('--page-card-color', styles.dark.color)
-    styleVar('--common-color-pair', styles.black)
-    styleVar('--accordion-button-background', styles.dark.accordionButtonColor)
-    styleVar('--accordion-button-color', styles.white)
-    styleVar('--bootstrap-colors', styles.dark.bootstrap)
-    styleVar('--common-color-pair2', styles.white)
-    styleVar('--accordion-button-after-url', styles.dark.accordionAfterUrl)
-  } else {
-    styleVar('--scrollbar-color', 'rgb(136, 136, 136)')
-    styleVar('--scrollbar-color-hover', 'rgb(208, 208, 208)')
-    styleVar('--scrollbar-background', styles.light.backgroundColor)
-    styleVar('--separator-text-color', styles.light.color)
-    styleVar('--page-card-color', styles.light.color)
-    styleVar('--common-color-pair', styles.white)
-    styleVar('--accordion-button-background', styles.light.accordionButtonColor)
-    styleVar('--accordion-button-color', styles.black)
-    styleVar('--bootstrap-colors', styles.light.bootstrap)
-    styleVar('--common-color-pair2', styles.black)
-    styleVar('--accordion-button-after-url', styles.light.accordionAfterUrl)
-  }
+  Object.entries(css).forEach(([key, value]) => {
+    styleVar(key, value[dark ? 'dark' : 'light'])
+  })
 }

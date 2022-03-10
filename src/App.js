@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import MenuBar from './components/MenuBar'
-import Post from './components/Post'
+import Post from './components/Pages/Post'
 import PageNotFound from './components/PageNotFound'
 import './App.css'
 import Blog from './components/Blog'
-import Page from './components/Page'
+import Page from './components/Pages/Page'
 import { useSelector } from 'react-redux'
 import { updateStyles } from './utils/helpers'
 import { styles } from './styles/styles'
@@ -21,6 +21,7 @@ const App = () => {
     <div>
       <MenuBar />
       <Routes>
+        <Route path="/pages/main" element={<Navigate replace to='/'/>} />
         <Route path="/pages/:page" element={<Page />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:namespace/:post" element={<Post namespaced />} />

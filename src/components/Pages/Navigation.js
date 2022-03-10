@@ -2,7 +2,7 @@ import React from 'react'
 import { Col, Nav, Tab } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { styles } from '../styles/styles'
+import { styles } from '../../styles/styles'
 
 const Navigation = ({ config, activeKey, path='pages' }) => {
   const navigate = useNavigate()

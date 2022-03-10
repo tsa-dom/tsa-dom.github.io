@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Container } from 'react-bootstrap'
-import { getConfig } from '../services/blog'
+import { getConfig } from '../../services/blog'
 import { useSelector, useDispatch } from 'react-redux'
-import { setBlog } from '../features/configSlice'
+import { setBlog } from '../../features/configSlice'
 import PostListMobile from './PostListMobile'
 import PostList from './PostList'
 

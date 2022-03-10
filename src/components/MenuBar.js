@@ -3,7 +3,7 @@ import { Container, Nav } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import Hamburger from 'hamburger-react'
 import MobileMenu from './MobileMenu'
-import DarkLightButton from './DarkLightButton'
+import DarkLightButton from './Embeds/DarkLightButton'
 
 
 const MenuBar = () => {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { setDarkMode } from '../features/configSlice'
+import { setDarkMode } from '../../features/configSlice'
 import { BsMoonStarsFill, BsSunFill } from 'react-icons/bs'
 
 const DarkLightButton = () => {

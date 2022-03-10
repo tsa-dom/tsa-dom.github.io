@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Card, Col, Row } from 'react-bootstrap'
-import { getPublishedText } from '../utils/helpers'
+import { getPublishedText } from '../../utils/helpers'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
