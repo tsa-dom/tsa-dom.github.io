@@ -10,10 +10,10 @@
     "pages/about.html": "/pages/about.html",
     "blog/test2/test.html": "/blog/test2/test.html",
     "blog/index.html": "/blog/index.html",
+    "blog/test/test.html": "/blog/test/test.html",
     "blog/test/test2.html": "/blog/test/test2.html",
     "blog/test2/test2.html": "/blog/test2/test2.html",
     "blog/test/yttest.html": "/blog/test/yttest.html",
-    "blog/test/test.html": "/blog/test/test.html",
     "index.html": "/index.html",
     "main.f0b769ef.css.map": "/static/css/main.f0b769ef.css.map",
     "main.e561f539.js.map": "/static/js/main.e561f539.js.map"
