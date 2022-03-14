@@ -1,36 +1,40 @@
-import React from 'react'
-import { Button, Card, Col, Row } from 'react-bootstrap'
-import { getPublishedText } from '../../utils/helpers'
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Col, Container, FormControl, InputGroup } from 'react-bootstrap'
+import { navScrollEvent } from '../../utils/helpers'
+import Post from './Post'
 
 const PostList = ({ posts }) => {
-  const dark = useSelector(state => state.config.dark)
-  const navigate = useNavigate()
+  const [filteredPosts, setFilteredPosts] = useState(posts)
+
+  const filterByTitle = (value) => {
+    setFilteredPosts(posts.filter(p => p.title.toLowerCase().includes(value.toLowerCase())))
+  }
+
+  useEffect(navScrollEvent)
 
   return (
-    <Row xs={1} sm={2} md={3} className="g-4 posts">
-      {posts.map((post, i) => {
-        return (
-          <Col key={i}>
-            <Card border="dark" text={dark ? 'light' : 'dark' } bg={dark ? 'dark' : 'light'}>
-              <Card.Header as="h5">{post.keywords}</Card.Header>
-              <Card.Body>
-                <Card.Title>{post.title}</Card.Title>
-                <Card.Text>{post.description}</Card.Text>
-                <Button
-                  style={{ width: 150, backgroundColor: 'rgb(45, 185, 143)' }}
-                  onClick={() => navigate(`/blog/${post.file}`)}
-                >Read</Button>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">{getPublishedText(post.created)}</small>
-              </Card.Footer>
-            </Card>
-          </Col>
-        )
-      })}
-    </Row>
+    <Container className='separator'>
+      <Container className='page'>
+        <h2 style={{ marginBottom: 25 }}>All blog posts</h2>
+        <div style={{ marginTop: 10 }}>
+          {filteredPosts.map((post, i) => <Post key={i} post={post} />)}
+        </div>
+        {!filteredPosts.length && <div>No posts found...</div>}
+      </Container>
+      <Container className='tab'>
+        <Col style={{ width: 270, marginLeft: 10 }} id='sticky-col'>
+          <h3>Search</h3>
+          <InputGroup className="mb-3">
+            <FormControl
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="basic-addon2"
+              onChange={e => filterByTitle(e.target.value)}
+            />
+          </InputGroup>
+        </Col>
+      </Container>
+    </Container>
   )
 }
 
