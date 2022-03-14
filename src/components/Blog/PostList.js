@@ -22,7 +22,7 @@ const PostList = ({ posts }) => {
         {!filteredPosts.length && <div>No posts found...</div>}
       </Container>
       <Container className='tab'>
-        <Col style={{ width: 270, marginLeft: 10 }} id='sticky-col'>
+        <Col style={{ width: 255, marginLeft: 10 }} id='sticky-col'>
           <h3>Search</h3>
           <InputGroup className="mb-3">
             <FormControl
