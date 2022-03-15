@@ -20,7 +20,7 @@ const PageNotFound = () => {
       <div><em>{window.location.href}</em></div>
       <div>does not exist...</div>
       <Button
-        style={{ marginTop: 20, backgroundColor: 'rgb(45, 185, 143)', color: 'black', fontSize: 16 }}
+        style={{ marginTop: 20, backgroundColor: 'rgb(220,220,220)', borderColor: 'black', color: 'black', fontSize: 16 }}
         onClick={() => navigate('/')}
       >
         Back to main page

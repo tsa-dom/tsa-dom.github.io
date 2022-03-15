@@ -23,7 +23,10 @@ const Post = ({ post }) => {
         <h4>{post.title}</h4>
         <div style={{ color: 'rgb(120,120,120)' }}>
           <div>{post.description}</div>
-          <div style={{ marginTop: 5 }}>{getMonthName(created)} {format(created, 'd, yyyy')}</div>
+          <div style={{ marginTop: 5 }}>
+            {getMonthName(created)} {format(created, 'd, yyyy')}
+            <span style={{ marginLeft: 5 }}></span>
+          </div>
         </div>
       </a>
       <hr></hr>

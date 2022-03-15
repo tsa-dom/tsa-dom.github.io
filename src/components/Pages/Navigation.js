@@ -1,8 +1,9 @@
 import React from 'react'
-import { Col, Nav, Tab } from 'react-bootstrap'
+import { Nav, Tab } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { styles } from '../../styles/styles'
+import TabBarProvider from '../TabBarProvider'
 
 const Navigation = ({ config, activeKey, path='pages' }) => {
   const navigate = useNavigate()
@@ -11,9 +12,9 @@ const Navigation = ({ config, activeKey, path='pages' }) => {
   if (!config) return <></>
 
   return (
-    <Tab.Container activeKey={activeKey} >
-      <Col id="sticky-col">
-        <h4 id="sticky-col-head">Resources</h4>
+    <TabBarProvider>
+      <Tab.Container activeKey={activeKey} >
+        <h4>Resources</h4>
         <Nav
           variant="pills"
           className="flex-row"
@@ -29,8 +30,8 @@ const Navigation = ({ config, activeKey, path='pages' }) => {
             </Nav.Item>
           })}
         </Nav>
-      </Col>
-    </Tab.Container>
+      </Tab.Container>
+    </TabBarProvider>
   )
 }
 

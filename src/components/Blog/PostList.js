@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Col, Container, FormControl, InputGroup } from 'react-bootstrap'
 import { navScrollEvent } from '../../utils/helpers'
+import TabBarProvider from '../TabBarProvider'
 import Post from './Post'
 
 const PostList = ({ posts }) => {
@@ -22,17 +24,19 @@ const PostList = ({ posts }) => {
         {!filteredPosts.length && <div>No posts found...</div>}
       </Container>
       <Container className='tab'>
-        <Col style={{ width: 255, marginLeft: 10 }} id='sticky-col'>
-          <h3>Search</h3>
-          <InputGroup className="mb-3">
-            <FormControl
-              placeholder="Search"
-              aria-label="Search"
-              aria-describedby="basic-addon2"
-              onChange={e => filterByTitle(e.target.value)}
-            />
-          </InputGroup>
-        </Col>
+        <TabBarProvider>
+          <Col style={{ width: 255, marginLeft: 10 }}>
+            <h3>Search</h3>
+            <InputGroup className="mb-3">
+              <FormControl
+                placeholder="Search"
+                aria-label="Search"
+                aria-describedby="basic-addon2"
+                onChange={e => filterByTitle(e.target.value)}
+              />
+            </InputGroup>
+          </Col>
+        </TabBarProvider>
       </Container>
     </Container>
   )

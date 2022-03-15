@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { Route, Routes, Navigate } from 'react-router-dom'
-import MenuBar from './components/MenuBar'
 import Post from './components/Pages/Post'
 import PageNotFound from './components/PageNotFound'
 import './App.css'
@@ -9,17 +8,32 @@ import Page from './components/Pages/Page'
 import { useSelector } from 'react-redux'
 import { updateStyles } from './utils/helpers'
 import { styles } from './styles/styles'
+import ScrollUpMenu from './components/ScrollUpMenu'
+import _ from 'lodash'
+export const Globals = createContext()
 
 const App = () => {
   const dark = useSelector(state => state.config.dark)
+  const [showMenu, setShowMenu] = useState(true)
   useEffect(() => {
     document.body.style.backgroundColor = dark ? styles.dark.backgroundColor : styles.light.backgroundColor
     updateStyles(dark)
   }, [dark])
 
+  let scrollPos = 0
+  useEffect(() => {
+    window.addEventListener('scroll', _.debounce(() => {
+      const top = document.body.getBoundingClientRect().top
+      if (top >= scrollPos) setShowMenu(true)
+      else setShowMenu(false)
+      scrollPos = top
+    }, 50))
+  }, [])
+
   return (
-    <div>
-      <MenuBar />
+    <Globals.Provider value={{ showMenu }}>
+      <ScrollUpMenu />
+      <div style={{ height: 50 }}></div>
       <Routes>
         <Route path="/pages/main" element={<Navigate replace to='/'/>} />
         <Route path="/pages/:page" element={<Page />} />
@@ -30,7 +44,7 @@ const App = () => {
         <Route path="/" element={<Page main />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
-    </div>
+    </Globals.Provider>
   )
 }
 
