@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.f0b769ef.css",
-    "main.js": "/static/js/main.cee20849.js",
+    "main.css": "/static/css/main.fcd9a242.css",
+    "main.js": "/static/js/main.a91270a1.js",
     "pages/cyber-security-base-essays.html": "/pages/cyber-security-base-essays.html",
     "blog/seo/react-app-seo-for-github-pages.html": "/blog/seo/react-app-seo-for-github-pages.html",
     "blog/react/theme-toggle.html": "/blog/react/theme-toggle.html",
@@ -15,11 +15,11 @@
     "blog/test2/test2.html": "/blog/test2/test2.html",
     "blog/test/yttest.html": "/blog/test/yttest.html",
     "index.html": "/index.html",
-    "main.f0b769ef.css.map": "/static/css/main.f0b769ef.css.map",
-    "main.cee20849.js.map": "/static/js/main.cee20849.js.map"
+    "main.fcd9a242.css.map": "/static/css/main.fcd9a242.css.map",
+    "main.a91270a1.js.map": "/static/js/main.a91270a1.js.map"
   },
   "entrypoints": [
-    "static/css/main.f0b769ef.css",
-    "static/js/main.cee20849.js"
+    "static/css/main.fcd9a242.css",
+    "static/js/main.a91270a1.js"
   ]
 }
