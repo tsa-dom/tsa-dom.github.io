@@ -24,14 +24,14 @@ const App = () => {
   useEffect(() => {
     window.addEventListener('scroll', _.debounce(() => {
       const top = document.body.getBoundingClientRect().top
-      if (top >= scrollPos) setShowMenu(true)
+      if (top >= scrollPos + 30) setShowMenu(true)
       else setShowMenu(false)
       scrollPos = top
     }, 50))
   }, [])
 
   return (
-    <Globals.Provider value={{ showMenu }}>
+    <Globals.Provider value={{ showMenu, setShowMenu }}>
       <ScrollUpMenu />
       <div style={{ height: 50 }}></div>
       <Routes>

@@ -1,18 +1,15 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
-import { Col, Container, FormControl, InputGroup } from 'react-bootstrap'
-import { navScrollEvent } from '../../utils/helpers'
+import _ from 'lodash'
+import React, { useState } from 'react'
+import { Col, Container, FormControl } from 'react-bootstrap'
 import TabBarProvider from '../TabBarProvider'
 import Post from './Post'
 
 const PostList = ({ posts }) => {
   const [filteredPosts, setFilteredPosts] = useState(posts)
 
-  const filterByTitle = (value) => {
+  const filterByTitle = _.debounce((value) => {
     setFilteredPosts(posts.filter(p => p.title.toLowerCase().includes(value.toLowerCase())))
-  }
-
-  useEffect(navScrollEvent)
+  }, 200)
 
   return (
     <Container className='separator'>
@@ -27,14 +24,12 @@ const PostList = ({ posts }) => {
         <TabBarProvider>
           <Col style={{ width: 255, marginLeft: 10 }}>
             <h3>Search</h3>
-            <InputGroup className="mb-3">
-              <FormControl
-                placeholder="Search"
-                aria-label="Search"
-                aria-describedby="basic-addon2"
-                onChange={e => filterByTitle(e.target.value)}
-              />
-            </InputGroup>
+            <FormControl
+              placeholder="Search"
+              aria-label="Search"
+              aria-describedby="basic-addon2"
+              onChange={e => filterByTitle(e.target.value)}
+            />
           </Col>
         </TabBarProvider>
       </Container>

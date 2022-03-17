@@ -23,6 +23,7 @@
   right: 0;
   cursor: initial;
   margin-right: -25px;
+  cursor: default !important;
 }
 
 .nav-button:hover {

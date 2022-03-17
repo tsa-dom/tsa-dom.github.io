@@ -1,21 +1,24 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext } from 'react'
-import { Offcanvas } from 'react-bootstrap'
 import MenuBar from './MenuBar'
 import { Globals } from '../App'
+import styled from 'styled-components'
+
+const MenuProvider = styled.div`
+  margin-top: ${props => props.showMenu ? '0' : '-100px' };
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  transition: margin-top 0.5s;
+`
 
 const ScrollUpMenu = () => {
   const { showMenu } = useContext(Globals)
 
   return (
-    <Offcanvas
-      show={showMenu}
-      placement='top'
-      scroll={true}
-      backdrop={false}
-      style={{ height: 51 }}
-    >
+    <MenuProvider showMenu={showMenu}>
       <MenuBar />
-    </Offcanvas>
+    </MenuProvider>
   )
 }
 

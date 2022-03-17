@@ -6,7 +6,6 @@ import { addPage } from '../../features/pageSlice'
 import { getConfig } from '../../services/blog'
 import { setPages, setGroups } from '../../features/configSlice'
 import PageNotFound from '../PageNotFound'
-import { navScrollEvent } from '../../utils/helpers'
 import PageView from './PageView'
 
 const Page = ({ main }) => {
@@ -19,8 +18,6 @@ const Page = ({ main }) => {
   })
   const exec = useDispatch()
   const [pageNotFound, setPageNotFound] = useState(false)
-
-  useEffect(navScrollEvent)
 
   useEffect(async () => {
     setPageNotFound(false)
