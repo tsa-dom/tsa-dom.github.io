@@ -8,7 +8,7 @@ const MenuProvider = styled.div`
   position: fixed;
   width: 100%;
   z-index: 10;
-  transition: margin-top 0.5s linear;
+  transition: margin-top 0.3s linear;
 `
 
 const ScrollUpMenu = () => {
